@@ -18,21 +18,12 @@
 #define SYN 0
 #define SYN_ACK 1
 #define ACK 2
-#define MESSAGE 3
-#define EXIT 4
-
 
 int server_handshake(int *to_client);
 int client_handshake(int *to_server);
 
-//for basic & persistent servers
-int server_connect(int from_client);
-
-//for forking server
+//used by server handshake
 int server_setup();
 
-//multi_server
-int multi_server_setup();
-int multi_server_connect(int from_client, struct message m);
 
 #endif

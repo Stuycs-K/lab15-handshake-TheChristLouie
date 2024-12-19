@@ -1,4 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
 #include "pipe_networking.h"
+
+#define READ 0
+#define WRITE 1
+
 //UPSTREAM = to the server / from the client
 //DOWNSTREAM = to the client / from the server
 /*=========================
@@ -11,11 +24,14 @@
   =========================*/
 int server_setup() {
   int from_client = 0;
+  mkfifo("well_known_pipe",0666);
+  int fd = open("well_known_pipe", O_RDONLY);
+  read(fd, from_client, sizeof(from_client));
   return from_client;
 }
 
 /*=========================
-  server_handshake 
+  server_handshake
   args: int * to_client
 
   Performs the server side pipe 3 way handshake.
@@ -25,6 +41,9 @@ int server_setup() {
   =========================*/
 int server_handshake(int *to_client) {
   int from_client;
+  mkfifo(sprintf("%d",getpid()),0666);
+  *toclient = open(sprintf("%d",getpid()),O_WRONLY);
+
   return from_client;
 }
 
@@ -56,5 +75,3 @@ int server_connect(int from_client) {
   int to_client  = 0;
   return to_client;
 }
-
-
