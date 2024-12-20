@@ -23,10 +23,10 @@
   returns the file descriptor for the upstream pipe.
   =========================*/
 int server_setup() {
-  int from_client = 0;
+  int from_client;
   mkfifo("well_known_pipe",0666);
-  int fd = open("well_known_pipe", O_RDONLY);
-  read(fd, from_client, sizeof(from_client));
+  from_client = open("well_known_pipe", O_RDONLY);
+  remove("well_known_pipe");
   return from_client;
 }
 
@@ -41,12 +41,13 @@ int server_setup() {
   =========================*/
 int server_handshake(int *to_client) {
   int from_client;
+  from_client = server_setup()
+  int fd = open("well_known_pipe", O_WRONLY);
+  write(sprintf("%d",getpid()));
   mkfifo(sprintf("%d",getpid()),0666);
-  *toclient = open(sprintf("%d",getpid()),O_WRONLY);
-
+  *to_client = open(sprintf("%d",getpid()),O_RDONLY);
   return from_client;
 }
-
 
 /*=========================
   client_handshake
@@ -59,19 +60,7 @@ int server_handshake(int *to_client) {
   =========================*/
 int client_handshake(int *to_server) {
   int from_server;
+  from_server= open("well_known_pipe",O_RDONLY);
+  *to_server = open(sprintf("%d",getpid()),O_WRONLY);
   return from_server;
-}
-
-
-/*=========================
-  server_connect
-  args: int from_client
-
-  handles the subserver portion of the 3 way handshake
-
-  returns the file descriptor for the downstream pipe.
-  =========================*/
-int server_connect(int from_client) {
-  int to_client  = 0;
-  return to_client;
 }
