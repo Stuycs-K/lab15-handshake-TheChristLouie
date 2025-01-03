@@ -41,11 +41,13 @@ int server_setup() {
   =========================*/
 int server_handshake(int *to_client) {
   int from_client;
-  from_client = server_setup()
-  int fd = open("well_known_pipe", O_WRONLY);
-  write(sprintf("%d",getpid()));
+  char str[10];
+  from_client = server_setup();
+  sprintf(str,"%d",getpid());
   mkfifo(sprintf("%d",getpid()),0666);
-  *to_client = open(sprintf("%d",getpid()),O_RDONLY);
+  int fd = open("well_known_pipe", O_WRONLY);
+  write(fd,str,strlen(str)+1);
+  *to_client = open(str,O_RDONLY);
   return from_client;
 }
 
@@ -60,7 +62,10 @@ int server_handshake(int *to_client) {
   =========================*/
 int client_handshake(int *to_server) {
   int from_server;
-  from_server= open("well_known_pipe",O_RDONLY);
-  *to_server = open(sprintf("%d",getpid()),O_WRONLY);
+  char str[10];
+  sprintf(str,"%d",getpid());
+  *to_server = open(("well_known_pipe"),O_WRONLY);
+  write(*to_server, str, strlen(str) + 1);
+  from_server = open("well_known_pipe", O_RDONLY);
   return from_server;
 }
