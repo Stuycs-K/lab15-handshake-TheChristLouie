@@ -1,7 +1,7 @@
 compile: create_client forking_server persistent_server basic_server
 
 create_client: basic_client.o pipe_networking.o
-	@gcc -o client basic_client.o pipe_networking.o
+	@gcc -o cliente basic_client.o pipe_networking.o
 
 basic_server: basic_server.o pipe_networking.o
 	@gcc -o basic_server basic_server.o pipe_networking.o
@@ -24,8 +24,8 @@ persistent_server.o: persistent_server.c pipe_networking.h
 forking_server.o: forking_server.c pipe_networking.h
 	@gcc -c forking_server.c
 
-client: client
-	@./client
+client: cliente
+	@./cliente
 
 server: forking_server
 	@./forking_server
