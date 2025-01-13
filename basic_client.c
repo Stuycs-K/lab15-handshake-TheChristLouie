@@ -13,12 +13,12 @@ int main() {
     Try to read/write from: from_server/to_server
     The order should correspond to your basic_server.
   */
+  int count = 0;
   while (1){
-    int count = 0;
     srand(time(NULL));
     int r = rand();
     printf("Send #%d: Sent %d\n",count,r);
-    write(to_server, &r, sizeof(r)+1);
+    write(to_server, &r, sizeof(int));
     count++;
     sleep(1);
   }
