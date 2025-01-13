@@ -14,10 +14,8 @@ int main() {
     The order should correspond to your basic_server.
   */
 
-  int rec = 0;
-  read(from_server, &rec, sizeof(int));
-  printf("%d\n",rec);
-  close(to_server);
-  close(from_server);
+  int number = 25;
+  write(to_server,&number,sizeof(int));
+  printf("Wrote %d\n", number);
   return 0;
 }
