@@ -14,10 +14,11 @@ int main() {
     The order should correspond to your basic_server.
   */
   while (1){
+    int count = 0;
     srand(time(NULL));
     int r = rand();
-    int count = 0;
     printf("Send #%d: Sent %d\n",count,r);
+    write(to_server, message, strlen(message) + 1);
     count++;
     sleep(1);
   }
