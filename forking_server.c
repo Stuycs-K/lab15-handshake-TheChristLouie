@@ -35,14 +35,13 @@ void forking_server(){
   int to_client;
   int from_client;
   while(1) {
-    from_client = server_setup();
+    from_client = server_handshake( &to_client );
     pid_t p = fork();
     if(p < 0){
       printf("Fork error %s\n", strerror(errno));
       exit(1);
     }
     if(p == 0){
-      from_client = server_handshake( &to_client );
       while(1){
         int received;
         sleep(1);
