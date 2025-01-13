@@ -37,7 +37,7 @@ void persistent_server(){
     while(1){
       int received;
       sleep(1);
-      if(read(from_client, received,sizeof(received)-1)<=0) {
+      if(read(from_client, &received,sizeof(received)-1)<=0) {
         printf("Client Exited\n");
         break;
       }
