@@ -6,6 +6,12 @@ client: basic_client.o pipe_networking.o
 server: basic_server.o pipe_networking.o
 	gcc -o server basic_server.o pipe_networking.o
 
+persistent_server.o: persistent_server.c pipe_networking.h
+	gcc -c persistent_server.o persistent_server.c
+
+forking_server.o: forking_server.c pipe_networking.h
+	gcc -c forking_server.o forking_server.c
+
 basic_client.o: basic_client.c pipe_networking.h
 	gcc -c basic_client.c
 
