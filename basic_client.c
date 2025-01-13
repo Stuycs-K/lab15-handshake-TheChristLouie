@@ -14,21 +14,10 @@ int main() {
     The order should correspond to your basic_server.
   */
 
-  char received[100];
-  int err = read(from_server, received, sizeof(received));
-  if (err == -1){
-    printf("Error in read: %s\n", strerror(errno));
-    return 1;
-  }
-  received[err] = '\0';
-  printf("Client received: %s\n", received);
-
-  char *str = "Hello Server\n";
-  if (write(to_server, str, strlen(str) + 1) == -1){
-    printf("Error in write: %s\n", strerror(errno));
-    return 1;
-  }
-  printf("Message sent to server: %s\n", str);
-
+  int rec = 0;
+  read(from_server, &rec, sizeof(int));
+  printf("%d\n",rec);
+  close(to_server);
+  close(from_server);
   return 0;
 }
