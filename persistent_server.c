@@ -27,8 +27,8 @@ Make a new file for this part: persistant_server.c™ (copy your working basic_s
 
 */
 
-void persistent_server() {
-  while(1) {
+void persistent_server(){
+  while(1){
     //Header from basic_client.c
     int to_client;
     int from_client;
