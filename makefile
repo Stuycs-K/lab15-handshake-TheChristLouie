@@ -1,4 +1,4 @@
-all: client server
+all: client server persistent_server.o forking_server.o
 
 client: basic_client.o pipe_networking.o
 	gcc -o client basic_client.o pipe_networking.o
