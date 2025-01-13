@@ -1,10 +1,10 @@
-all: client server persistent_server forking_server
+compile: create_client forking_server persistent_server basic_server
 
-client: basic_client.o pipe_networking.o
+create_client: basic_client.o pipe_networking.o
 	@gcc -o client basic_client.o pipe_networking.o
 
-server: basic_server.o pipe_networking.o
-	@gcc -o server basic_server.o pipe_networking.o
+basic_server: basic_server.o pipe_networking.o
+	@gcc -o basic_server basic_server.o pipe_networking.o
 
 persistent_server: persistent_server.o pipe_networking.o
 	@gcc -o persistent_server persistent_server.o pipe_networking.o
@@ -23,6 +23,12 @@ persistent_server.o: persistent_server.c pipe_networking.h
 
 forking_server.o: forking_server.c pipe_networking.h
 	@gcc -c forking_server.c
+
+client: client
+	@./client
+
+server: server
+	@./forking_server
 
 clean:
 	rm server
