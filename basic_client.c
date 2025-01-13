@@ -13,7 +13,7 @@ int main() {
     Try to read/write from: from_server/to_server
     The order should correspond to your basic_server.
   */
-
+  printf("Ready");
   int number = 25;
   write(to_server,&number,sizeof(int));
   printf("Wrote %d\n", number);
