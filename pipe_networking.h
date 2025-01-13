@@ -6,10 +6,11 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <errno.h>
+#include <time.h>
 
 #ifndef NETWORKING_H
 #define NETWORKING_H
-#define WKP "mario"
+#define WKP "/tmp/mario"
 
 #define HANDSHAKE_BUFFER_SIZE 10
 #define BUFFER_SIZE 1000
