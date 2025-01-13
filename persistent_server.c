@@ -26,6 +26,12 @@ Make a new file for this part: persistant_server.c™ (copy your working basic_s
     You must now also add a sighandler for SIGINT. This will delete the WKP befor ending the server.
 
 */
+static void sighandler(int signo){
+  if (signo == SIGINT) {
+    remove(WKP);
+    exit(1);
+  }
+}
 
 int main() {
   signal(SIGINT, sighandler);
@@ -47,12 +53,5 @@ int main() {
     }
     close(to_client);
     close(from_client);
-  }
-}
-
-static void sighandler(int signo){
-  if (signo == SIGINT) {
-    remove(WKP);
-    exit(1);
   }
 }
