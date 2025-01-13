@@ -35,18 +35,13 @@ void persistent_server(){
     from_client = server_handshake( &to_client );
     //Loop
     while(1){
-      //Send Random Integer
-      srand(time(NULL));
-      int r = rand();
-      int count = 0;
-      printf("Send #%d: Sent %d\n",count,r);
-      //Check if Exited
-      if(write(to_client, &r, sizeof(int)) == -1){
+      char received [256];
+      sleep(1);
+      if(read(from_client, received,sizeof(received)-1)<=0) {
         printf("Client Exited\n");
         break;
       }
-      count++;
-      sleep(1);
+      printf("Recieved %s\n", received);
     }
     close(to_client);
     close(from_client);
