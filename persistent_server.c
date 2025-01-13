@@ -27,8 +27,10 @@ Make a new file for this part: persistant_server.c™ (copy your working basic_s
 
 */
 
-void persistent_server(){
-  while(1){
+int main() {
+  signal(SIGINT, sighandler);
+  signal(SIGPIPE, sighandler);
+    while(1){
     //Header from basic_client.c
     int to_client;
     int from_client;
@@ -53,10 +55,4 @@ static void sighandler(int signo){
     remove(WKP);
     exit(1);
   }
-}
-
-int main() {
-  signal(SIGINT, sighandler);
-  signal(SIGPIPE, sighandler);
-  persistent_server();
 }

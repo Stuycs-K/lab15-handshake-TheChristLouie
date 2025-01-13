@@ -31,7 +31,9 @@ The server should only:
 
 */
 
-void forking_server(){
+int main(){
+  signal(SIGINT, sighandler);
+  signal(SIGPIPE, sighandler);
   int to_client;
   int from_client;
   while(1) {
@@ -45,7 +47,7 @@ void forking_server(){
       while(1){
         int received;
         sleep(1);
-        if(read(from_client, &received,sizeof(int))<=0) {
+        if(read(from_client, &received,sizeof(int))<=0){
           printf("Client Exited\n");
           break;
         }
@@ -60,17 +62,12 @@ void forking_server(){
       close(from_client);
     }
   }
+  return 0;
 }
 
 static void sighandler(int signo){
-  if (signo == SIGINT) {
+  if(signo == SIGINT){
     remove(WKP);
     exit(1);
   }
-}
-
-int main() {
-  signal(SIGINT, sighandler);
-  signal(SIGPIPE, sighandler);
-  forking_server();
 }
