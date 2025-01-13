@@ -35,13 +35,13 @@ void persistent_server(){
     from_client = server_handshake( &to_client );
     //Loop
     while(1){
-      char received [256];
+      int received;
       sleep(1);
       if(read(from_client, received,sizeof(received)-1)<=0) {
         printf("Client Exited\n");
         break;
       }
-      printf("Recieved %s\n", received);
+      printf("Recieved %d\n", received);
     }
     close(to_client);
     close(from_client);
