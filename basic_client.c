@@ -18,7 +18,7 @@ int main() {
     srand(time(NULL));
     int r = rand();
     printf("Send #%d: Sent %d\n",count,r);
-    write(to_server, message, strlen(message) + 1);
+    write(to_server, r, sizeof(r)+1);
     count++;
     sleep(1);
   }
