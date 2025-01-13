@@ -31,6 +31,13 @@ The server should only:
 
 */
 
+static void sighandler(int signo){
+  if(signo == SIGINT){
+    remove(WKP);
+    exit(1);
+  }
+}
+
 int main(){
   signal(SIGINT, sighandler);
   signal(SIGPIPE, sighandler);
@@ -63,11 +70,4 @@ int main(){
     }
   }
   return 0;
-}
-
-static void sighandler(int signo){
-  if(signo == SIGINT){
-    remove(WKP);
-    exit(1);
-  }
 }
