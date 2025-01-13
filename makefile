@@ -27,7 +27,7 @@ forking_server.o: forking_server.c pipe_networking.h
 client: client
 	@./client
 
-server: server
+server: forking_server
 	@./forking_server
 
 clean:
