@@ -49,7 +49,7 @@ void forking_server(){
           printf("Client Exited\n");
           break;
         }
-        printf("Recieved %d\n", received);
+        printf("%d Recieved %d\n", getpid(), received);
       }
       close(to_client);
       close(from_client);
